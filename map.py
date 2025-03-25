@@ -6,9 +6,9 @@ gdf = gpd.read_file("ne_10m_admin_0_countries.shp")
 filtered_gdf = gdf[gdf['SOVEREIGNT'].isin(['Vietnam', 'Malaysia', 'United States of America'])]
 
 colors = {
-    'Vietnam': '#7FFF00',
-    'Malaysia': '#1E90FF',
-    'United States of America': '#FF4500'
+    'Vietnam': '#DA291C',
+    'Malaysia': '#00205B',
+    'United States of America': '#3C3B6E'
 }
 
 geojson = json.loads(filtered_gdf.to_json())
