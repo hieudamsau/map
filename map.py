@@ -41,7 +41,7 @@ else:
     # ✅ Tạo GeoDataFrame mới chỉ chứa LineString duy nhất
     new_gdf = gpd.GeoDataFrame(geometry=[line], crs="EPSG:4326")
 
-    # ✅ Ghi đè lên file cũ tạm thời (để xử lý lại với thuộc tính màu)
+    # ✅ Ghi tạm ra file để chỉnh sửa thuộc tính
     temp_file = 'temp.geojson'
     new_gdf.to_file(temp_file, driver='GeoJSON')
 
@@ -50,11 +50,17 @@ else:
         data = json.load(f)
 
     for feature in data['features']:
-        feature['properties']['stroke'] = "#DA291C"            # Màu đường
-        feature['properties']['stroke-width'] = 2              # Độ dày đường
-        feature['properties']['stroke-opacity'] = 0.8          # Độ trong suốt của đường
-        feature['properties']['fill'] = "#DA291C"              # Màu nền
+        # 🔥 Đặt lại thuộc tính viền và màu để loại bỏ hoàn toàn màu đen
+        feature['properties']['stroke'] = "#DA291C"            # Màu viền = Màu Việt Nam
+        feature['properties']['stroke-width'] = 2              # Độ dày viền
+        feature['properties']['stroke-opacity'] = 1.0          # Độ trong suốt của viền
+        feature['properties']['fill'] = "#DA291C"              # Màu nền = Màu Việt Nam
         feature['properties']['fill-opacity'] = 0.6            # Độ trong suốt của màu nền
+
+        # 🔥 Loại bỏ các thuộc tính thừa hoặc sai màu nếu có
+        feature['properties'].pop('outline', None)
+        feature['properties'].pop('border', None)
+        feature['properties'].pop('color', None)
 
     # ✅ Ghi đè lại vào file cũ
     with open(file_path, 'w') as f:
