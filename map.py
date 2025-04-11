@@ -9,7 +9,7 @@ filtered_gdf = gdf[gdf['SOVEREIGNT'].isin(['Vietnam', 'Malaysia', 'United States
 
 # Đặt màu cho từng nước
 colors = {
-    'Vietnam': '#7FFF00',  # Xanh lá cây sáng
+    'Vietnam': '#DA291C',  # Xanh lá cây sáng
     'Malaysia': '#1E90FF',  # Xanh dương
     'United States of America': '#FF4500',  # Đỏ cam
     'Indonesia': '#FFD700'  # Vàng
